@@ -178,7 +178,7 @@ do
   end
   os.sleep(0.5) -- Allow signal processing by libraries.
   computer.pushSignal("init") -- so libs know components are initialized.
-
+	
   status("Initializing system...", true)
 
 	local f = io.open("/etc/environment")
