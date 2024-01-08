@@ -32,6 +32,5 @@ end
 gpu.setBackground(0x000000)
 gpu.setForeground(0xFFFFFF)
 term.clear()
-dofile("/lib/desktop.lua")
 print("Starting BODE (Bloop OS Desktop Enviroment)")
 dofile("/bin/desktop.lua")
