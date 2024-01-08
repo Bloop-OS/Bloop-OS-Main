@@ -2,3 +2,4 @@
 -- as user space /etc/profile comes after this point anyways
 loadfile("/bin/hostname.lua")("--update")
 os.setenv("SHELL","/bin/sh.lua")
+loadfile("/bin/desktop.lua")
