@@ -25,7 +25,7 @@ local loadingBarY = textY + 1
 -- You can customize the loading animation here
 for i = 1, loadingBarWidth do
     gpu.set(loadingBarX + i - 1, loadingBarY, "█")
-    os.sleep(0.1)  -- Adjust the sleep duration for desired speed
+    os.sleep(0.2)  -- Adjust the sleep duration for desired speed
 end
 
 -- Reset colors after the animation
@@ -33,4 +33,5 @@ gpu.setBackground(0x000000)
 gpu.setForeground(0xFFFFFF)
 term.clear()
 print("Starting BODE (Bloop OS Desktop Enviroment)")
+os.sleep(0.1)
 dofile("/bin/desktop.lua")
