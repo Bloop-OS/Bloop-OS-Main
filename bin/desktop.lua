@@ -4,6 +4,7 @@ local term = require("term")
 local event = require("event")
 local gpu = require("component").gpu
 local os = require("os")
+local fs = require("filesystem")
 
 gpu.setResolution(80, 25)
 
@@ -77,7 +78,14 @@ local function displayIcons()
 
     -- Draw icons with red foreground and black background
     openWindow("File Explorer", 2, 2, 20, 10, function(x, y, width, height)
-        -- Placeholder: Display files in the current directory
+        -- Get the list of files in the current directory
+        local files = fs.list(fs.get("/"))
+
+        -- Display files
+        for i, file in ipairs(files) do
+            term.setCursor(x, y + i)
+            term.write(file)
+        end
     end)
 
     openWindow("Text Editor", 24, 2, 20, 10, function(x, y, width, height)
@@ -105,57 +113,6 @@ local function displayIcons()
 
         closeWindow()
         displayIcons()
-    end)
-
-    openWindow("Settings", 46, 2, 20, 10, function(x, y, width, height)
-        term.setCursor(x, y + 2)
-        term.write("1. Change Background Color")
-
-        term.setCursor(x, y + 5)
-        term.write("Select an option: ")
-        local option = tonumber(term.read())
-
-        if option == 1 then
-            term.clear()
-            term.setCursor(x, y)
-            term.write("Choose a background color:")
-            term.setCursor(x, y + 2)
-            term.write("1. Black")
-            term.setCursor(x, y + 4)
-            term.write("2. Blue")
-            term.setCursor(x, y + 6)
-            term.write("3. Green")
-            term.setCursor(x, y + 8)
-            term.write("4. Red")
-            term.setCursor(x, y + 10)
-            term.write("5. White")
-
-            term.setCursor(x, y + 13)
-            term.write("Enter the corresponding number: ")
-            local colorOption = tonumber(term.read())
-
-            if colorOption == 1 then
-                gpu.setBackground(0x000000)  -- Black background
-            elseif colorOption == 2 then
-                gpu.setBackground(0x0000FF)  -- Blue background
-            elseif colorOption == 3 then
-                gpu.setBackground(0x00FF00)  -- Green background
-            elseif colorOption == 4 then
-                gpu.setBackground(0xFF0000)  -- Red background
-            elseif colorOption == 5 then
-                gpu.setBackground(0xFFFFFF)  -- White background
-            end
-
-            term.clear()
-            displayIcons()
-        else
-            term.clear()
-            term.setCursor(x, y)
-            term.write("Invalid option. Please select a valid option.")
-            os.sleep(2)
-            term.clear()
-            displayIcons()
-        end
     end)
 end
 
